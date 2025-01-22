@@ -1,6 +1,6 @@
 import React, {  useState } from "react";
 import "../App.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import plan1 from "../assets/plan-1.jpg";
 import plan2 from "../assets/plan-2.jpg";
 import plan3 from "../assets/plan-3.jpg";
@@ -13,6 +13,7 @@ const Home = () => {
     flightNumber: "",
     scheduledDepartureDate: "",
   });
+  const navigate = useNavigate();
 
   const [flightData, setFlightData] = useState(null); // To store fetched data
 
@@ -55,6 +56,7 @@ const Home = () => {
       // Log the response data
       console.log("Fetched flight data:", response.data);
       setFlightData(response.data);
+      navigate("/status", { state: { flightData: response.data } });
     } catch (e) {
       console.error("Error fetching flight status:", e);
       alert("Failed to fetch flight status. Please try again.");
@@ -161,18 +163,11 @@ const Home = () => {
             </div>
           </div>
           <button className="btn" onClick={handlesubmit}>
-            <i className="ri-search-line"></i>
+           Search<i class="bi bi-airplane"></i>
           </button>
         </form>
       </section>
 
-      {/* Flight Data Section */}
-      {flightData && (
-        <section className="section__container">
-          <h2>Flight Data:</h2>
-          <pre>{JSON.stringify(flightData, null, 2)}</pre>
-        </section>
-      )}
 
       {/* Plan Section */}
       <section className="section__container plan__container">
