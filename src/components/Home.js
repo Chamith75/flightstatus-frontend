@@ -43,7 +43,7 @@ const Home = () => {
   
     try {
       const response = await axios.get(
-        `https://flightapiamdues.onrender.com/flightstatus`,
+        `http://api.flights.bobros.in/flightshedule/v2/schedule/flights`,
         {
           params: {
             carrierCode,
